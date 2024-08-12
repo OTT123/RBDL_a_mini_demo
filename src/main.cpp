@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
   namespace rbdl = RigidBodyDynamics;
   // robot 对象
   std::unique_ptr<RigidBodyDynamics::Model> robot_ = std::make_unique<rbdl::Model>();
-  rbdl::Addons::URDFReadFromFile("~/learn_ws/learn_rbdl/urdf/ur5.urdf", robot_.get(), false, true);
+  rbdl::Addons::URDFReadFromFile("./urdf/ur5.urdf", robot_.get(), false, true);
   std::cout << "Model Hierarchy:" << std::endl;
   std::cout << rbdl::Utils::GetModelHierarchy(*robot_) << std::endl;
   std::cout << "Degree of freedoms overview: " << robot_->dof_count << std::endl;
