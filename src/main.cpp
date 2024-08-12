@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
   namespace rbdl = RigidBodyDynamics;
   // robot 对象
   std::unique_ptr<RigidBodyDynamics::Model> robot_ = std::make_unique<rbdl::Model>();
-  rbdl::Addons::URDFReadFromFile("~/RBDL_a_mini_demo/urdf/ur5.urdf", robot_.get(), false, true);
+  rbdl::Addons::URDFReadFromFile("/home/bytedance//RBDL_a_mini_demo/urdf/ur5_robot.urdf", robot_.get(), false, false);
   std::cout << "Model Hierarchy:" << std::endl;
   std::cout << rbdl::Utils::GetModelHierarchy(*robot_) << std::endl;
   std::cout << "Degree of freedoms overview: " << robot_->dof_count << std::endl;
@@ -44,6 +44,7 @@ int main(int argc, char const *argv[])
   q << 1, 0, 1, 0, 1, 0;
   qd << 0, 1, 0, 1, 0, 1;
 
+  // tau = Mqddot + Cqdot + G
   rbdl::CompositeRigidBodyAlgorithm(*robot_, q, M, false);
   std::cout << "get Mass Mat = " << std::endl;
   std::cout << "[ " << M << " ]" << std::endl;
@@ -63,12 +64,19 @@ int main(int argc, char const *argv[])
   Eigen::Vector3d zeros_local_pos;
   zeros_local_pos << 0.01, 0.01, 0.01;
   std::cout << "test Jdot*Qdot" << std::endl;
-  std::cout << "[ " << rbdl::CalcPointAcceleration(*robot_, q, qd, zeros, robot_->GetBodyId("ee_link"), zeros_local_pos).transpose() << " ]" << std::endl;
+  std::cout << "[ " << rbdl::CalcPointAcceleration(*robot_, q, qd, zeros, robot_->GetBodyId("wrist_3_link"), zeros_local_pos).transpose() << " ]" << std::endl;
 
   Eigen::MatrixXd point_jac;
-  rbdl::CalcPointJacobian(*robot_, q, robot_->GetBodyId("wrist_3_link"), zeros_local_pos, point_jac, false);
+  point_jac.setZero(3, kNumDofs);
+  rbdl::CalcPointJacobian(*robot_, q, robot_->GetBodyId("wrist_3_link"),  zeros_local_pos, point_jac, false);
   std::cout << "test point Jac" << std::endl;
   std::cout << "[ " << point_jac << " ]" << std::endl;
 
+  // Jacobian
+  Eigen::MatrixXd point_jac6D;
+  point_jac6D.setZero(6, kNumDofs);
+  rbdl::CalcPointJacobian6D(*robot_, q, robot_->GetBodyId("wrist_3_link"), zeros_local_pos, point_jac6D, false);
+  std::cout << "test point Jac6d" << std::endl;
+  std::cout << "[ " << point_jac6D << " ]" << std::endl;
   return 0;
 }
