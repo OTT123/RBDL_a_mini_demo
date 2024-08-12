@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/learn_rbdl.dir/main.cpp.o -o ../bin/learn_rbdl  -Wl,-rpath,/usr/local/lib /usr/local/lib/librbdl.so /usr/local/lib/librbdl_urdfreader.so 
