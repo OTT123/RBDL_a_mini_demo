@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/bytedance/learn_ws/learn_rbdl/src/main.cpp" "src/CMakeFiles/learn_rbdl.dir/main.cpp.o" "gcc" "src/CMakeFiles/learn_rbdl.dir/main.cpp.o.d"
+  "/home/bytedance/learn_ws/RBDL_a_mini_demo/src/main.cpp" "src/CMakeFiles/learn_rbdl.dir/main.cpp.o" "gcc" "src/CMakeFiles/learn_rbdl.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links.

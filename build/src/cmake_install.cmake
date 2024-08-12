@@ -1,4 +1,4 @@
-# Install script for directory: /home/bytedance/learn_ws/learn_rbdl/src
+# Install script for directory: /home/bytedance/learn_ws/RBDL_a_mini_demo/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

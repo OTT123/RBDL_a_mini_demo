@@ -1,5 +1,5 @@
 src/CMakeFiles/learn_rbdl.dir/main.cpp.o: \
- /home/bytedance/learn_ws/learn_rbdl/src/main.cpp \
+ /home/bytedance/learn_ws/RBDL_a_mini_demo/src/main.cpp \
  /usr/include/stdc-predef.h /usr/local/include/rbdl/rbdl.h \
  /usr/local/include/rbdl/rbdl_math.h \
  /usr/local/include/rbdl/rbdl_config.h /usr/local/include/Eigen/Dense \
