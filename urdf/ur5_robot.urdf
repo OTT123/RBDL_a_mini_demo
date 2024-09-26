@@ -6,38 +6,9 @@
 <robot name="ur5" xmlns:xacro="http://wiki.ros.org/xacro">
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="ros_control">
-      <!--robotNamespace>/</robotNamespace-->
-      <!--robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType-->
     </plugin>
-    <!--
-    <plugin name="gazebo_ros_power_monitor_controller" filename="libgazebo_ros_power_monitor.so">
-      <alwaysOn>true</alwaysOn>
-      <updateRate>1.0</updateRate>
-      <timeout>5</timeout>
-      <powerStateTopic>power_state</powerStateTopic>
-      <powerStateRate>10.0</powerStateRate>
-      <fullChargeCapacity>87.78</fullChargeCapacity>
-      <dischargeRate>-474</dischargeRate>
-      <chargeRate>525</chargeRate>
-      <dischargeVoltage>15.52</dischargeVoltage>
-      <chargeVoltage>16.41</chargeVoltage>
-    </plugin>
--->
+
   </gazebo>
-  <!-- measured from model -->
-  <!--property name="shoulder_height" value="0.089159" /-->
-  <!--property name="shoulder_offset" value="0.13585" /-->
-  <!-- shoulder_offset - elbow_offset + wrist_1_length = 0.10915 -->
-  <!--property name="upper_arm_length" value="0.42500" /-->
-  <!--property name="elbow_offset" value="0.1197" /-->
-  <!-- CAD measured -->
-  <!--property name="forearm_length" value="0.39225" /-->
-  <!--property name="wrist_1_length" value="0.093" /-->
-  <!-- CAD measured -->
-  <!--property name="wrist_2_length" value="0.09465" /-->
-  <!-- In CAD this distance is 0.930, but in the spec it is 0.09465 -->
-  <!--property name="wrist_3_length" value="0.0823" /-->
-  <!-- manually measured -->
   <link name="base_link">
     <visual>
       <geometry>
@@ -298,44 +269,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <gazebo reference="shoulder_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="upper_arm_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="forearm_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="wrist_1_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="wrist_3_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="wrist_2_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="ee_link">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <!-- ROS base_link to UR 'Base' Coordinates transform -->
-  <link name="base">
-    <inertial>
-      <mass value="0"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
-    </inertial>
-  </link>
-  <joint name="base_link-base_fixed_joint" type="fixed">
-    <!-- NOTE: this rotation is only needed as long as base_link itself is
-                 not corrected wrt the real robot (ie: rotated over 180
-                 degrees)
-      -->
-    <origin rpy="0 0 -3.14159265359" xyz="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="base"/>
-  </joint>
+
   <!-- Frame coincident with all-zeros TCP on UR controller -->
   <link name="tool0">
     <inertial>
@@ -348,11 +282,5 @@
     <origin rpy="-1.57079632679 0 0" xyz="0 0.0823 0"/>
     <parent link="wrist_3_link"/>
     <child link="tool0"/>
-  </joint>
-  <link name="world"/>
-  <joint name="world_joint" type="fixed">
-    <parent link="world"/>
-    <child link="base_link"/>
-    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
   </joint>
 </robot>

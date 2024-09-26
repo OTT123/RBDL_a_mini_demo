@@ -9,11 +9,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(${PROJECT_NAME}
                 main.cpp
+                robot_info.cpp
 )
-# target_include_directories(${PROJECT_NAME}
-#   PUBLIC
-  
-# )
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+  ${CMAKE_SOURCE_DIR}/include
+)
+
 target_link_libraries(${PROJECT_NAME}
                       ${RBDL_LIBRARY}
                       ${RBDL_URDFREADER_LIBRARY}
